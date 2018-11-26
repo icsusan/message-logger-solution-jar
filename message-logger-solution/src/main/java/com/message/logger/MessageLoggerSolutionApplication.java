@@ -53,14 +53,14 @@ public class MessageLoggerSolutionApplication {
 	        messageTypeIn = br.readLine();
 	        
 	        //Validando el tipo de mensaje ingresado, si no es válido, el programa lo notificará y se cerrará
-	        validateMessageTypeInput(messageTypeIn);
+	        messageTypeIn = validateMessageTypeInput(messageTypeIn);
 			
 	        //Solicitando el ingreso de las salidas
 	        System.out.println("**** Indique las opciones de impresión (C: Consola, A: Archivo, B: Base de datos, puede elegir varias a la vez, por ejemplo CAB, BA, etc.): ");
 	        outputSelectedIn = br.readLine();
 	        
 	        //Validando las opciones ingresadas, si no son válidas, el programa lo notificará y se cerrará
-	        validateOutputSelectedInput(outputSelectedIn);
+	        outputSelectedIn = validateOutputSelectedInput(outputSelectedIn);
 	        
 			/*
 			 * Imprimiendo el mensaje de aviso de fin de ingreso de valores, si llegó aquí
@@ -77,14 +77,14 @@ public class MessageLoggerSolutionApplication {
 	        boolean error = Boolean.FALSE;
 	        
 	        //Si se capturó una letra "E", el usuario solicitó un mensaje de tipo error
-	        if (messageTypeIn.equalsIgnoreCase("E")) {
+	        if (messageTypeIn.equalsIgnoreCase("M")) {
 	        	message = Boolean.TRUE;	        
 	        } else if (messageTypeIn.equalsIgnoreCase("A")) {
 	        	
 	        	//Si se capturó una letra "A", el usuario solicitó un mensaje de tipo advertencia
 	        	warning = Boolean.TRUE;
 	        	
-	        } else if (messageTypeIn.equalsIgnoreCase("M")) {
+	        } else if (messageTypeIn.equalsIgnoreCase("E")) {
 	        	
 	        	//Si se capturó una letra "M", el usuario solicitó un mensaje de tipo informativo
 	        	error = Boolean.TRUE;
@@ -94,8 +94,6 @@ public class MessageLoggerSolutionApplication {
 	        boolean console = Boolean.FALSE;
 	        boolean file = Boolean.FALSE;
 	        boolean database = Boolean.FALSE;
-	        
-	        outputSelectedIn = outputSelectedIn.toUpperCase();
 	        
 	        //Si el texto contiene una letra "C", el usuario solicitó imprimir el mensaje en la consola
 	        if (outputSelectedIn.contains("C")) {
@@ -145,8 +143,9 @@ public class MessageLoggerSolutionApplication {
 	 * @param outputSelectedIn texto de ingreso, capturado desde la consola de
 	 *                         ingreso
 	 */
-	private static void validateOutputSelectedInput(String outputSelectedIn) {
+	private static String validateOutputSelectedInput(String outputSelectedIn) {
 		
+		outputSelectedIn = outputSelectedIn.toUpperCase();
 		if (StringUtils.isBlank(outputSelectedIn)) {
 			System.out.println("ERROR: Ha ingresado un valor inválido.");
 			printEndInputValue();
@@ -156,6 +155,8 @@ public class MessageLoggerSolutionApplication {
 			printEndInputValue();
 			System.exit(0);
 		}
+		
+		return outputSelectedIn;
 		
 	}
 
@@ -168,7 +169,9 @@ public class MessageLoggerSolutionApplication {
 	 * 
 	 * @param messageTypeIn texto de ingreso, capturado desde la consola de ingreso
 	 */
-	private static void validateMessageTypeInput(String messageTypeIn) {
+	private static String validateMessageTypeInput(String messageTypeIn) {
+		
+		messageTypeIn = messageTypeIn.toUpperCase();
 		if (StringUtils.isBlank(messageTypeIn)) {
 			System.out.println("ERROR: Ha ingresado un valor inválido.");
 			printEndInputValue();
@@ -180,6 +183,7 @@ public class MessageLoggerSolutionApplication {
 			printEndInputValue();
 			System.exit(0);
 		}
+		return messageTypeIn;
 	}
 
 	/**
