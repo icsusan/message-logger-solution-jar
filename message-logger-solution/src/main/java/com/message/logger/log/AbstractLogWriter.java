@@ -13,7 +13,7 @@ import com.message.logger.model.persist.LogValues;
  * registrar mensaje de logs en una salida indicada por el cliente que lo
  * solicite. Adicionalmente, considera la implementación concreta de algunos
  * métodos utilitarios para validar y trabajar los {@link StreamHandler} que se
- * usen en los log.
+ * usen en los log. 
  * 
  * <p>
  * Generado por @author <a href="ic.susan@gmail.com">Susan Inga</a> el
